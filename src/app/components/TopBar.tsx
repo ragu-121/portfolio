@@ -56,8 +56,9 @@ const TopBar = () => {
 
     return (
         <>
-            <div ref={navbardesktop} className='hidden custom-container h-full lg:flex justify-between items-center rounded-full bg-black dark:bg-white'>
-                <ul id="navlistitems" className='w-full flex justify-evenly items-center gap-3 '>
+        <div className="bg-primary h-full hidden lg:block">
+            <div ref={navbardesktop} className='hidden custom-container h-full lg:flex justify-between items-center lg:w-3xl lg:mx-auto dark:bg-white'>
+                <ul id="navlistitems" className='w-full flex justify-evenly items-center gap-3'>
                     <li className='menu'>Home</li>
                     <li className='menu'>Skills</li>
                     <li className='menu'>Projects</li>
@@ -72,7 +73,9 @@ const TopBar = () => {
                     </li>
                 </ul>
             </div>
-            <div className="h-full w-full flex justify-between items-center bg-[#333333] px-4 lg:hidden">
+
+        </div>
+            <div className="h-full w-full flex justify-between items-center bg-primary px-4 lg:hidden">
                 <span className="relavite z-9" onClick={() => setMobileMenu(!mobileMenu)}>{mobileMenu ? <HiOutlineX color="#fff" size={32} /> : <HiMenuAlt1 color="#fff" size={32} />}   </span>
                 <span>
                     <div className={`cursor-pointer w-[54px] h-[32px] bg-white rounded-3xl inline-flex items-center p-1 ${darkTheme ? 'bg-black' : 'bg-white'}`} onClick={() => setdarkTheme(!darkTheme)}>
