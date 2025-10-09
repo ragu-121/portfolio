@@ -38,7 +38,8 @@
           after:h-[2px] after:bg-[#34b484] after:transition-all after:duration-300 after:w-full
   }
   .custom-container{
-    @apply max-w-[1200px] mx-auto;
+    @apply max-w-[1200px] mx-auto px-4;
+
   }
 
   /* .shine{
