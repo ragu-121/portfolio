@@ -87,31 +87,22 @@ const Contact = () => {
 
   return (
     <section className="custom-container w-full pt-16 px-6 pb-6 flex flex-col items-center justify-center gap-6 lg:flex-row">
-      {/* <div className='w-full'>
-                <h2 className="text-4xl md:text-6xl font-bold">Get in touch</h2>
-                <div className="pt-8">
-                    <div className="">
-                        <Link href='/' className="no-underline hover:underline underline-offset-2 text-sm font-medium flex items-start justify-start gap-1"><Image src='/images/linkedin_icon.svg' alt="linkedin" width={18} height={18} /> Linkedin</Link>
-                    </div> 
-                    <p className="text-sm font-medium my-3 flex items-center justify-start gap-1"><Image src='/images/dialer_icon.svg' alt="dialer" width={18} height={18} /> +91 88787878784</p>
-                    <div className="inline-flex items-center justify-center gap-0.5 px-4 py-2 text-base bg-primary font-medium cursor-pointer">
-                        <Link href='/files/dummypdf.pdf' download={true} className="">Download Resume</Link>
-                    </div>
-                </div>
-            </div> */}
       <div className="w-full max-w-[767px]">
-        <h2 className="text-center text-4xl md:text-6xl font-bold">Get in touch</h2>
-        <p className="text-center text-sm leading-5 py-3">I'd love to hear from you! If you have any questions, comments, feedback, please use the form below.</p>
+        <h2 className="page-heading">Get in touch</h2>
+        <p className="text-center text-sm leading-5 py-3">
+          I'd love to hear from you! If you have any questions, comments,
+          feedback, please use the form below.
+        </p>
         <div className="flex flex-col md:flex-row items-center gap-0 md:gap-6">
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 relative">
             <label
               htmlFor="Name"
-              className="text-sm font-normal mt-4 mb-2 block"
+              className="text-sm font-normal mt-6 mb-2 block"
             >
               Name<span className="text-red-500">*</span>
             </label>
             <input
-            placeholder="Enter your name"
+              placeholder="Enter your name"
               type="text"
               name="name"
               id="Name"
@@ -121,20 +112,20 @@ const Contact = () => {
               autoComplete="off"
             />
             {errors?.name && (
-              <span className="text-red-500 text-xs font-normal">
+              <span className="text-red-500 text-xs font-normal absolute left-0 -bottom-5">
                 {errors.name}
               </span>
             )}
           </div>
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 relative">
             <label
               htmlFor="email"
-              className="text-sm font-normal mt-4 mb-2 block"
+              className="text-sm font-normal mt-6 mb-2 block"
             >
               Email<span className="text-red-500">*</span>
             </label>
             <input
-            placeholder="Enter your email"
+              placeholder="Enter your email"
               type="email"
               name="email"
               id="email"
@@ -144,7 +135,7 @@ const Contact = () => {
               autoComplete="off"
             />
             {errors?.email && (
-              <span className="text-red-500 text-xs font-normal">
+              <span className="text-red-500 text-xs font-normal absolute left-0 -bottom-5">
                 {errors.email}
               </span>
             )}
@@ -152,8 +143,8 @@ const Contact = () => {
         </div>
 
         <label
-          htmlFor="message"
-          className="text-sm font-normal mt-4 mb-2 block"
+          htmlFor="message" 
+          className="text-sm font-normal mt-6 mb-2 block"
         >
           Message
         </label>
@@ -168,16 +159,10 @@ const Contact = () => {
         ></textarea>
 
         <div className="w-full pt-3">
-          <button
-            className="btn-layout bg-secondary"
-            onClick={hanldeClear}
-          >
+          <button className="btn-layout bg-secondary" onClick={hanldeClear}>
             Clear All
           </button>
-          <button
-            className="btn-layout bg-primary ml-2"
-            onClick={handleSubmit}
-          >
+          <button className="btn-layout bg-primary ml-2" onClick={handleSubmit}>
             Submit
           </button>
         </div>
