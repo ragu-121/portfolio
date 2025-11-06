@@ -86,8 +86,8 @@ const Contact = () => {
   };
 
   return (
-    <section className="custom-container w-full pt-16 px-6 pb-6 flex flex-col items-center justify-center gap-6 lg:flex-row">
-      <div className="w-full max-w-[767px]">
+    <section id="contact" className="main-container-wrapper">
+      <div className="main-container w-full">
         <h2 className="page-heading">Get in touch</h2>
         <p className="text-center text-sm leading-5 py-3">
           I'd love to hear from you! If you have any questions, comments,
@@ -158,8 +158,8 @@ const Contact = () => {
           onChange={handleChange}
         ></textarea>
 
-        <div className="w-full pt-3">
-          <button className="btn-layout bg-secondary" onClick={hanldeClear}>
+        <div className="w-full pt-3 text-center">
+          <button className="btn-layout bg-blueone text-white" onClick={hanldeClear}>
             Clear All
           </button>
           <button className="btn-layout bg-primary ml-2" onClick={handleSubmit}>

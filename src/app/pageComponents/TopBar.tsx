@@ -9,6 +9,7 @@ import {
 } from "react-icons/hi";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 
 const TopBar = () => {
   const [darkTheme, setdarkTheme] = useState(false);
@@ -59,7 +60,8 @@ const TopBar = () => {
 
   return (
     <>
-      <div className="bg-primary h-full hidden lg:block">
+    {/* lg:block */}
+      <div className="bg-primary h-full hidden">
         <div
           ref={navbardesktop}
           className="hidden custom-container h-full lg:flex justify-between items-center lg:w-3xl lg:mx-auto dark:bg-white"
@@ -68,10 +70,10 @@ const TopBar = () => {
             id="navlistitems"
             className="w-full flex justify-evenly items-center gap-3"
           >
-            <li className="menu">Home</li>
-            <li className="menu">Skills</li>
-            <li className="menu">Projects</li>
-            <li className="menu">Contact</li>
+            <li className="menu"><Link href={'#home'} >Home</Link> </li>
+            <li className="menu"><Link href={'#skills'}>Skills</Link></li>
+            <li className="menu"><Link href={'#projects'} >Projects</Link></li>
+            <li className="menu"><Link href={'#contact'} >Contact</Link></li>
             {/* <li>
                         <div className={`cursor-pointer w-[54px] h-[32px] bg-white rounded-3xl inline-flex items-center p-1 ${darkTheme ? 'bg-black' : 'bg-white'}`} onClick={() => setdarkTheme(!darkTheme)}>
                             <span className={`w-1/2 h-full rounded-full grid place-content-center transition-transform duration-300 ease-in-out  ${darkTheme ? '' : 'bg-[#2f3792] rotate-180'}`}><HiOutlineSun color={darkTheme ? '#7A7A73' : '#fff'} /></span>

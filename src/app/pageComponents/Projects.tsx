@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import Image from "next/image";
 import { HiOutlineArrowSmRight } from "react-icons/hi";
@@ -10,7 +11,7 @@ const Projects = () => {
       description: "To find your favourite movies",
       techstacks_used: ["React", "Node.js", "Stripe", "MongoDB"],
       image_url:
-        "https://images.unsplash.com/photo-1730794545099-14902983739d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXNpZ24lMjBtb2NrdXB8ZW58MXx8fHwxNzYwMzc3MTM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
       image_desc: "Movie",
       github_link: "",
       live_link: "",
@@ -28,9 +29,9 @@ const Projects = () => {
   ];
   return (
     <>
-      <section className="main-container-wrapper">
+      <section className="main-container-wrapper" id="projects">
         <div className="main-container w-full">
-          <div className="py-10">
+          <div className="">
             <h2 className="page-heading">Projects</h2>
             <div className="flex flex-wrap gap-6 items-center justify-center">
               {project_details.map((project, index) => (
