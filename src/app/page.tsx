@@ -1,5 +1,5 @@
 "use client";
-import Squares from "./customComponents/Squares";
+// import Squares from "./customComponents/Squares";
 import Contact from "./pageComponents/Contact";
 import Home from "./pageComponents/Home";
 import Projects from "./pageComponents/Projects";

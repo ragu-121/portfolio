@@ -229,7 +229,7 @@ const Skills = () => {
   useGSAP(() => {
     const items = gsap.utils.toArray(".skillitems");
 
-    items.forEach((item) => {
+    items.forEach((item:any) => {
       gsap.fromTo(
         item,
         { opacity: 0, scale: 0.5 },
