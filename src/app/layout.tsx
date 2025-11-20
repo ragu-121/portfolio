@@ -47,15 +47,15 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
   return (
     <html lang="en">
       <body className={` ${outfit.className} min-h-screen relative dark:bg-black`}>
-        <header className="h-[54px] w-full sticky top-0 z-10">
+        <header className="h-[54px] w-full sticky top-0 z-10 ">
           <TopBar />
         </header>
         <main>
           {children}
         </main>
-        <footer>
+        {/* <footer>
           <Footer />
-        </footer>
+        </footer> */}
       </body>
     </html>
   );

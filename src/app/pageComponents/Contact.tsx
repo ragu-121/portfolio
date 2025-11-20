@@ -106,7 +106,7 @@ const Contact = () => {
               type="text"
               name="name"
               id="Name"
-              className="w-full h-11 rounded-lg border outline-0 px-3 hover:border-primary focus:border-primary focus:shadow-[0_0_0_0.25rem_#afef9e]"
+              className="w-full h-11 rounded-lg border outline-0 px-3 hover:border-primary focus:border-primary focus:shadow-[0_0_4px_3px_#afef9e]"
               onChange={handleChange}
               value={datas.name}
               autoComplete="off"
@@ -129,7 +129,7 @@ const Contact = () => {
               type="email"
               name="email"
               id="email"
-              className="w-full h-11 rounded-lg border outline-0 px-3 hover:border-primary focus:border-primary focus:shadow-[0_0_0_0.25rem_#afef9e]"
+              className="w-full h-11 rounded-lg border outline-0 px-3 hover:border-primary focus:border-primary focus:shadow-[0_0_4px_3px_#afef9e]"
               value={datas.email}
               onChange={handleChange}
               autoComplete="off"
@@ -153,7 +153,7 @@ const Contact = () => {
           placeholder="Enter your message"
           name="message"
           id="message"
-          className="w-full rounded-lg border outline-0 p-3 resize-none hover:border-primary focus:border-primary focus:shadow-[0_0_0_0.25rem_#afef9e]"
+          className="w-full rounded-lg border outline-0 p-3 resize-none hover:border-primary focus:border-primary focus:shadow-[0_0_4px_3px_#afef9e]"
           value={datas.message}
           onChange={handleChange}
         ></textarea>

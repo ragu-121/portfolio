@@ -60,12 +60,13 @@ const TopBar = () => {
 
   return (
     <>
-    {/* lg:block */}
-      <div className="bg-primary h-full hidden">
+    
+      <div className="bg-primary h-full hidden lg:block">
         <div
           ref={navbardesktop}
           className="hidden custom-container h-full lg:flex justify-between items-center lg:w-3xl lg:mx-auto dark:bg-white"
         >
+          <p className="text-xl font-bold">PORTFOLIO</p>
           <ul
             id="navlistitems"
             className="w-full flex justify-evenly items-center gap-3"
@@ -85,6 +86,8 @@ const TopBar = () => {
           </ul>
         </div>
       </div>
+      
+      {/* mobile menu */}
       <div className="h-full w-full flex justify-between items-center bg-primary px-4 lg:hidden">
         <span
           className="relavite z-9"

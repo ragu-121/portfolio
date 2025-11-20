@@ -43,7 +43,7 @@ const Toast = ({ toastMessage, autoClose = 3000,onClose }: toastProps) => {
         
     if (toastOpen) {
         return createPortal(
-            <div id='toast' className='max-w-xl p-2 fixed top-6 left-1/2 -translate-x-1/2 bg-blue-400 rounded-xl '>
+            <div id='toast' className='max-w-xl p-2 fixed top-6 left-1/2 -translate-x-1/2 bg-blueone rounded-xl z-50 '>
                 <p className='text-white text-sm font-normal'>{toastMessage}</p>
             </div>,
             document.body)

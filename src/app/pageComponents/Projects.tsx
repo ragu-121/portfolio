@@ -1,10 +1,17 @@
 'use client';
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { HiOutlineArrowSmRight } from "react-icons/hi";
 import { ExternalLink, Github, ArrowUpRight, Badge } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP);
 
 const Projects = () => {
+  const projRef = useRef<HTMLDivElement>(null);
   const project_details = [
     {
       title: "Movies",
@@ -27,17 +34,43 @@ const Projects = () => {
       live_link: "",
     },
   ];
+
+    useGSAP(
+    () => {
+      gsap.fromTo(
+        ".projitems",
+        { opacity: 0, scale: 0.5 },
+        {
+          opacity: 1,
+          scale: 1,
+          stagger: 0.2,
+          duration: 0.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: projRef.current,
+            start: "top bottom", // when section enters viewport
+            // end: "bottom 60%",
+            toggleActions: "play none none reverse",
+            //  onEnter, onLeave, onEnterBack, and onLeaveBack
+            // markers: true,       // enable to debug
+          },
+        }
+      );
+    },
+    { scope: projRef }
+  );
+
   return (
     <>
       <section className="main-container-wrapper" id="projects">
         <div className="main-container w-full">
           <div className="">
             <h2 className="page-heading">Projects</h2>
-            <div className="flex flex-wrap gap-6 items-center justify-center">
+            <div ref={projRef} className="flex flex-wrap gap-6 items-center justify-center">
               {project_details.map((project, index) => (
                 <div
                   key={index}
-                  className={`group relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-w-72 max-w-3xl`}
+                  className={`projitems group relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-w-72 max-w-3xl`}
                 >
                   <div className="absolute inset-0">
                     <Image
