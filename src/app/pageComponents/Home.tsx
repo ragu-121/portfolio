@@ -18,15 +18,30 @@ gsap.registerPlugin(TextPlugin);
 
 const Home = () => {
   // const [windowWidth,setWindowWidth] = useState(window.innerWidth);
-  const textRef = useRef<HTMLSpanElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
   const timeline = gsap.timeline();
 
   useGSAP(() => {
-    timeline.to(textRef.current, {
-      duration: 2,
-      text: "RAGUVANAN P",
-      ease: "none",
-    });
+    const dot = dotRef.current;
+    gsap.fromTo(
+      dot,
+      { scale: 0.1 },
+      {
+        scale: 20, // makes dot fill whole screen
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: dot,
+          start: "top center",
+          end: "bottom top",
+          scrub: true, // scroll-based animation
+        },
+      }
+    );
+    // timeline.to(textRef.current, {
+    //   duration: 2,
+    //   text: "RAGUVANAN P",
+    //   ease: "none",
+    // });
     timeline.from(".role", {
       opacity: 0,
       duration: 0.3,
@@ -62,11 +77,10 @@ const Home = () => {
 
   return (
     <>
-      {/* <div className="h-screen bg-amber-900"> */}
-        <ParticleTriangle />
-      {/* </div> */}
+      {/* <ParticleTriangle /> */}
       <section className="main-container-wrapper h-[calc(100dvh-54px)] overflow-hidden">
         {/* <Crosshair  color='#32FA01'/>  */}
+
         <div className="absolute inset-0">
           {/* <Particles
           particleColors={["#000", "#000"]}
@@ -99,8 +113,7 @@ const Home = () => {
         <div className="main-container w-full h-full flex items-center justify-center relative z-1">
           <div className="w-full text-center">
             <h2 className="text-3xl font-bold text-txt-n tracking-wide pt-3 pb-2 md:text-4xl">
-              I'm <span ref={textRef} className="text-primary"></span>
-              <span className="cursor"></span>
+              I'm <span className="focus-in-expand">RAGUVANAN P</span>
             </h2>
             <h5 className="role text-xl font-medium text-txt-n">
               Frontend Developer
@@ -121,6 +134,16 @@ const Home = () => {
               Download Resume
             </button>
           </div>
+          {/* <div
+        ref={dotRef}
+        style={{
+          width: "20px",
+          height: "20px",
+          margin:'0 auto',
+          background: "#03045E",
+          borderRadius: "50%",
+        }}
+      ></div> */}
         </div>
       </section>
     </>

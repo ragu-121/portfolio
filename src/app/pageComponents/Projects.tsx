@@ -35,9 +35,26 @@ const Projects = () => {
     },
   ];
 
-    useGSAP(
+  useGSAP(
     () => {
-      gsap.fromTo(
+
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: projRef.current, // Use the ref of the container element
+          start: "top 80%",              // Start the animation when the top of the trigger hits 80% down the viewport
+          end: "bottom 20%",             // End point of the ScrollTrigger (optional)
+          scrub: false,                  // Set to true for a scrub effect, or false for a single run
+          once: true,                    // Ensures the animation only runs once when the start point is hit
+          // markers: true,              // Uncomment for visual debugging
+        },
+      });
+      timeline.from('.headelem', {
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.inOut",
+      })
+
+      timeline.fromTo(
         ".projitems",
         { opacity: 0, scale: 0.5 },
         {
@@ -46,14 +63,14 @@ const Projects = () => {
           stagger: 0.2,
           duration: 0.5,
           ease: "power2.out",
-          scrollTrigger: {
-            trigger: projRef.current,
-            start: "top bottom", // when section enters viewport
-            // end: "bottom 60%",
-            toggleActions: "play none none reverse",
-            //  onEnter, onLeave, onEnterBack, and onLeaveBack
-            // markers: true,       // enable to debug
-          },
+          // scrollTrigger: {
+          //   trigger: projRef.current,
+          //   start: "top bottom", // when section enters viewport
+          //   // end: "bottom 60%",
+          //   toggleActions: "play none none reverse",
+          //   //  onEnter, onLeave, onEnterBack, and onLeaveBack
+          //   // markers: true,       // enable to debug
+          // },
         }
       );
     },
@@ -62,11 +79,11 @@ const Projects = () => {
 
   return (
     <>
-      <section className="main-container-wrapper" id="projects">
+      <section className="main-container-wrapper " id="projects" ref={projRef}>
         <div className="main-container w-full">
           <div className="">
-            <h2 className="page-heading">Projects</h2>
-            <div ref={projRef} className="flex flex-wrap gap-6 items-center justify-center">
+            <h2 className="page-heading headelem">Projects</h2>
+            <div className="flex flex-wrap gap-6 items-center justify-center">
               {project_details.map((project, index) => (
                 <div
                   key={index}

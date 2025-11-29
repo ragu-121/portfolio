@@ -229,6 +229,17 @@ const Skills = () => {
   useGSAP(() => {
     const items = gsap.utils.toArray(".skillitems");
 
+        // const timeline = gsap.timeline({
+        //     scrollTrigger: {
+        //         trigger: skillsRef.current, // Use the ref of the container element
+        //         start: "top 80%",              // Start the animation when the top of the trigger hits 80% down the viewport
+        //         end: "bottom 20%",             // End point of the ScrollTrigger (optional)
+        //         scrub: false,                  // Set to true for a scrub effect, or false for a single run
+        //         once: true,                    // Ensures the animation only runs once when the start point is hit
+        //         // markers: true,              // Uncomment for visual debugging
+        //     },
+        // });
+
     items.forEach((item:any) => {
       gsap.fromTo(
         item,
@@ -238,7 +249,7 @@ const Skills = () => {
           scale:1,
           duration: 0.4,
           ease: "power2.out",
-          // stagger:0.3,
+          stagger:0.3,
           scrollTrigger: {
             trigger: item,
             start: "top 85%", // triggers when each item enters the viewport
@@ -247,16 +258,16 @@ const Skills = () => {
         }
       );
     });
-  }, []);
+  }, {scope:skillsRef});
 
   return (
-    <section className="main-container-wrapper" id="skills">
+    <section className="main-container-wrapper" id="skills" ref={skillsRef}>
       <div className="py-10 main-container overflow-hidden">
         <div className="w-full relative z-1">
           <h2 className="page-heading">Skills</h2>
 
           <div
-            ref={skillsRef}
+            
             className="skill-container grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
           >
             {skills.map((skill, index) => {

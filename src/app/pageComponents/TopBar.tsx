@@ -64,7 +64,7 @@ const TopBar = () => {
       <div className="bg-primary h-full hidden lg:block">
         <div
           ref={navbardesktop}
-          className="hidden custom-container h-full lg:flex justify-between items-center lg:w-3xl lg:mx-auto dark:bg-white"
+          className="hidden custom-container h-full lg:flex justify-between items-center lg:w-5xl lg:mx-auto dark:bg-white"
         >
           <p className="text-xl font-bold">PORTFOLIO</p>
           <ul
