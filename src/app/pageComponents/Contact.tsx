@@ -93,49 +93,58 @@ const Contact = () => {
 
   useGSAP(() => {
     const timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: contactRef.current, // Use the ref of the container element
-                start: "top 80%",              // Start the animation when the top of the trigger hits 80% down the viewport
-                end: "bottom 20%",             // End point of the ScrollTrigger (optional)
-                scrub: false,                  // Set to true for a scrub effect, or false for a single run
-                once: true,                    // Ensures the animation only runs once when the start point is hit
-                // markers: true,              // Uncomment for visual debugging
-            },
-        });
-    timeline.from(".contactheadelem", {
-      opacity: 0,
-      duration: 0.3,
+       scrollTrigger: {
+          trigger: contactRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          scrub: false,
+          markers: false,
+
+          toggleActions: "play reverse play reverse",
+          // play when entering, reverse when leaving
+          // so animation always completes when exiting
+        },
+    });
+    timeline.from(contactRef.current, {
+      scale: 0.8,
+      // duration: 0.3,
       ease: "power2.inOut",
     });
-    timeline.from(".contactdesc", {
-      opacity: 0,
-      duration: 0.3,
-      ease: "power2.inOut",
-    });
-    timeline.from(".inpone", {
-      opacity: 0,
-      duration: 0.3,
-      ease: "power2.inOut",
-    });
-    timeline.from(".inptwo", {
-      opacity: 0,
-      duration: 0.3,
-      ease: "power2.inOut",
-    });
-    timeline.from(".inpthree", {
-      opacity: 0,
-      duration: 0.3,
-      ease: "power2.inOut",
-    });
-    timeline.from(".contactbtns", {
-      opacity: 0,
-      duration: 0.3,
-      ease: "power2.inOut",
-    })
-  },{scope:contactRef})
+    // timeline.from(".contactheadelem", {
+    //   opacity: 0,
+    //   duration: 0.3,
+    //   ease: "power2.inOut",
+    // });
+    // timeline.from(".contactdesc", {
+    //   opacity: 0,
+    //   duration: 0.3,
+    //   ease: "power2.inOut",
+    // });
+    // timeline.from(".inpone", {
+    //   opacity: 0,
+    //   duration: 0.3,
+    //   ease: "power2.inOut",
+    // });
+    // timeline.from(".inptwo", {
+    //   opacity: 0,
+    //   duration: 0.3,
+    //   ease: "power2.inOut",
+    // });
+    // timeline.from(".inpthree", {
+    //   opacity: 0,
+    //   duration: 0.3,
+    //   ease: "power2.inOut",
+    // });
+    // timeline.from(".contactbtns", {
+    //   opacity: 0,
+    //   duration: 0.3,
+    //   ease: "power2.inOut",
+    // })
+  }, { scope: contactRef })
 
   return (
-    <section id="contact" className="main-container-wrapper" ref={contactRef}>
+    <section id="contact" className="main-container-wrapper bg-[linear-gradient(181deg,rgb(165,255,165),transparent)]
+ rounded-2xl contactmaincontainer" ref={contactRef}>
       <div className="main-container w-full contactcontainer">
         <h2 className="page-heading contactheadelem">Get in touch</h2>
         <p className="text-center text-sm leading-5 py-3 contactdesc">
@@ -190,7 +199,7 @@ const Contact = () => {
             )}
           </div>
         </div>
-          
+
         <div className="inpthree">
           <label
             htmlFor="message"

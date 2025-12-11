@@ -6,71 +6,100 @@ import { ExternalLink, Github, ArrowUpRight, Badge } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(useGSAP);
 
 const Projects = () => {
   const projRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const project_details = [
     {
-      title: "Movies",
+      title: "Movies Web",
       description: "To find your favourite movies",
-      techstacks_used: ["React", "Node.js", "Stripe", "MongoDB"],
+      techstacks_used: ["React", "TailwindCss", "TMBD"],
       image_url:
         "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
       image_desc: "Movie",
       github_link: "",
-      live_link: "",
+      live_link: "https://movies-web-01.netlify.app",
     },
     {
-      title: "Movies",
-      description: "To find your favourite movies",
-      techstacks_used: ["React", "Node.js", "Stripe", "MongoDB"],
+      title: "Food Web",
+      description: "Order your favourite food",
+      techstacks_used: ["React", "JSON"],
       image_url:
-        "https://images.unsplash.com/photo-1730794545099-14902983739d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXNpZ24lMjBtb2NrdXB8ZW58MXx8fHwxNzYwMzc3MTM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "https://plus.unsplash.com/premium_photo-1673108852141-e8c3c22a4a22?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       image_desc: "Movie",
       github_link: "",
-      live_link: "",
+      live_link: "https://foodapp-web-123.netlify.app/",
     },
   ];
 
+  // useGSAP(
+  //   () => {
+
+  //     const timeline = gsap.timeline({
+  //       scrollTrigger: {
+  //         trigger: projRef.current, // Use the ref of the container element
+  //         start: "top 80%",              // Start the animation when the top of the trigger hits 80% down the viewport
+  //         end: "bottom 20%",             // End point of the ScrollTrigger (optional)
+  //         scrub: false,                  // Set to true for a scrub effect, or false for a single run
+  //         once: true,                    // Ensures the animation only runs once when the start point is hit
+  //         markers: true,              // Uncomment for visual debugging
+  //       },
+  //     });
+  //     timeline.from('.headelem', {
+  //       opacity: 0,
+  //       duration: 0.3,
+  //       ease: "power2.inOut",
+  //     })
+
+  //     timeline.fromTo(
+  //       ".projitems",
+  //       { opacity: 0, scale: 0.5 },
+  //       {
+  //         opacity: 1,
+  //         scale: 1,
+  //         stagger: 0.2,
+  //         duration: 0.5,
+  //         ease: "power2.out",
+  //       }
+  //     );
+  //   },
+  //   { scope: projRef }
+  // );
   useGSAP(
     () => {
-
       const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: projRef.current, // Use the ref of the container element
-          start: "top 80%",              // Start the animation when the top of the trigger hits 80% down the viewport
-          end: "bottom 20%",             // End point of the ScrollTrigger (optional)
-          scrub: false,                  // Set to true for a scrub effect, or false for a single run
-          once: true,                    // Ensures the animation only runs once when the start point is hit
-          // markers: true,              // Uncomment for visual debugging
+          trigger: projRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          scrub: false,
+          markers: false,
+
+          toggleActions: "play reverse play reverse",
+          // play when entering, reverse when leaving
+          // so animation always completes when exiting
         },
       });
-      timeline.from('.headelem', {
+
+      timeline.from(".headelem", {
         opacity: 0,
         duration: 0.3,
         ease: "power2.inOut",
-      })
+      });
 
       timeline.fromTo(
         ".projitems",
-        { opacity: 0, scale: 0.5 },
+        { opacity: 0, y:50 },
         {
           opacity: 1,
-          scale: 1,
-          stagger: 0.2,
-          duration: 0.5,
+          y:0,
+          duration: 0.2,
           ease: "power2.out",
-          // scrollTrigger: {
-          //   trigger: projRef.current,
-          //   start: "top bottom", // when section enters viewport
-          //   // end: "bottom 60%",
-          //   toggleActions: "play none none reverse",
-          //   //  onEnter, onLeave, onEnterBack, and onLeaveBack
-          //   // markers: true,       // enable to debug
-          // },
         }
       );
     },
@@ -122,7 +151,7 @@ const Projects = () => {
                       </div>
 
                       <div className="flex gap-4">
-                        <button className="btn-layout bg-white text-black group/btn">
+                        <button className="btn-layout bg-white text-black group/btn" onClick={()=>{window.open(project.live_link,'_blank')}}>
                           <ExternalLink className="w-4 h-4 mr-2 transition-transform group-hover/btn:translate-x-1" />
                           View Live
                         </button>

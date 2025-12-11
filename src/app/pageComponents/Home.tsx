@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 // import SplashCursor from "../customComponents/SplashCursor";
 // import DotGrid from "../customComponents/DotGrid";
 // import Particles from "../customComponents/Particles";
-// import Crosshair from "../customComponents/CrossHair";
 import { gsap } from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import { useGSAP } from "@gsap/react";
@@ -42,6 +41,12 @@ const Home = () => {
     //   text: "RAGUVANAN P",
     //   ease: "none",
     // });
+    timeline.from(".nametag", {
+      opacity: 0,
+      duration: 0.5,
+      // x:-50,
+      ease: "power2.inOut",
+    });
     timeline.from(".role", {
       opacity: 0,
       duration: 0.3,
@@ -79,27 +84,9 @@ const Home = () => {
     <>
       {/* <ParticleTriangle /> */}
       <section className="main-container-wrapper h-[calc(100dvh-54px)] overflow-hidden">
-        {/* <Crosshair  color='#32FA01'/>  */}
-
         <div className="absolute inset-0">
-          {/* <Particles
-          particleColors={["#000", "#000"]}
-          particleCount={300}
-          particleSpread={10}
-          speed={0.3}
-          particleBaseSize={100}
-          moveParticlesOnHover={true}
-          alphaParticles={false}
-          disableRotation={false}
-        /> */}
           {/* <div className="w-full h-full bg-amber-200"></div> */}
-          {/* <Squares
-          speed={0.5}
-          squareSize={40}
-          direction="up" // up, down, left, right, diagonal
-          borderColor="red"
-          hoverFillColor="green"
-        /> */}
+
           {/* {
           windowWidth > 1024 &&  <SplashCursor />
         } */}
@@ -108,12 +95,13 @@ const Home = () => {
           <source src="videos/pattern1.mp4" type="video/mp4" />
           video is not supported
         </video> */}
-          {/* <Image src={'/homebg1.jpg'} alt="mainbg" fill/> */}
+          {/* <Image src={'/bgimagethree.jpg'} alt="mainbg" fill/> */}
         </div>
         <div className="main-container w-full h-full flex items-center justify-center relative z-1">
           <div className="w-full text-center">
-            <h2 className="text-3xl font-bold text-txt-n tracking-wide pt-3 pb-2 md:text-4xl">
-              I'm <span className="focus-in-expand">RAGUVANAN P</span>
+            <h2 className="nametag text-3xl font-bold text-txt-n tracking-wide pt-3 pb-2 md:text-4xl">
+              I'm <span className="">RAGUVANAN P</span>
+              {/* focus-in-expand */}
             </h2>
             <h5 className="role text-xl font-medium text-txt-n">
               Frontend Developer
@@ -128,7 +116,7 @@ const Home = () => {
               Contact Me
             </button>
             <button
-              className="homebtns btn-layout ml-6 text-base bg-primary"
+              className="homebtns btn-layout ml-6 text-base bg-[#ffd700] hover:bg-yellow-500"
               onClick={handleDownload}
             >
               Download Resume
