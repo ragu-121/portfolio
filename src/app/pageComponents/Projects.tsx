@@ -20,7 +20,7 @@ const Projects = () => {
       description: "To find your favourite movies",
       techstacks_used: ["React", "TailwindCss", "TMBD"],
       image_url:
-        "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+        "/movie-web-img.jpg",
       image_desc: "Movie",
       github_link: "",
       live_link: "https://movies-web-01.netlify.app",
@@ -30,7 +30,7 @@ const Projects = () => {
       description: "Order your favourite food",
       techstacks_used: ["React", "JSON"],
       image_url:
-        "https://plus.unsplash.com/premium_photo-1673108852141-e8c3c22a4a22?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "/food-app-web.jpg",
       image_desc: "Movie",
       github_link: "",
       live_link: "https://foodapp-web-123.netlify.app/",
@@ -83,6 +83,7 @@ const Projects = () => {
                       alt={project.image_desc}
                       fill={true}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20"></div>
                     <div className="absolute inset-0 bg-gradient-to-r from-[#030213]/30 to-accent/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
