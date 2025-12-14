@@ -97,7 +97,7 @@ const Contact = () => {
       duration: 0.5,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: '#contact',
+        trigger: '#Contact',
         start: "top 80%",     // when section enters
         end: "bottom 20%",    // when it leaves
         toggleActions: "play none none reverse",
