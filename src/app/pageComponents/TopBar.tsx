@@ -10,6 +10,10 @@ import {
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const TopBar = () => {
   const [darkTheme, setdarkTheme] = useState(false);
@@ -18,9 +22,46 @@ const TopBar = () => {
   const navbardesktop = useRef<HTMLDivElement | null>(null);
   const navbarmobile = useRef<HTMLUListElement | null>(null);
 
+  const menus = [
+    { label: 'Home', id: 'Home' },
+    { label: 'Skills', id: 'Skills' },
+    { label: 'Projects', id: 'Projects' },
+    { label: 'Contact', id: 'Contact' },
+  ]
+
   const handleMenuChange = (menu: string) => {
     setActiveMenu(menu);
   };
+
+  const scrollToSection = (id: string) => {
+    const elemSection = document.getElementById(id);
+    if (!elemSection) return;
+
+    setActiveMenu(id);
+    elemSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+    // gsap.to(window, {
+    //   duration: 1,
+    //   scrollTo: `#${id}`,
+    //   ease:'bounce'
+    // });
+  }
+
+    useEffect(() => {
+    menus.forEach((item) => {
+      ScrollTrigger.create({
+        trigger: `#${item.id}`,
+        start: "top center",
+        end: "bottom center",
+        onEnter: () => setActiveMenu(item.id),
+        onEnterBack: () => setActiveMenu(item.id),
+      });
+    });
+
+    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+  }, []);
 
   useEffect(() => {
     if (darkTheme) {
@@ -60,8 +101,8 @@ const TopBar = () => {
 
   return (
     <>
-    
-      <div className="bg-primary h-full hidden lg:block">
+
+      <div className="bg-[#EEEEEC] h-full borde hidden lg:block">
         <div
           ref={navbardesktop}
           className="hidden custom-container h-full lg:flex justify-between items-center lg:w-5xl lg:mx-auto dark:bg-white"
@@ -71,10 +112,11 @@ const TopBar = () => {
             id="navlistitems"
             className="w-full flex justify-evenly items-center gap-3"
           >
-            <li className="menu"><Link href={'#home'} >Home</Link> </li>
-            <li className="menu"><Link href={'#skills'}>Skills</Link></li>
-            <li className="menu"><Link href={'#projects'} >Projects</Link></li>
-            <li className="menu"><Link href={'#contact'} >Contact</Link></li>
+            {
+              menus.map((menu, index) => (
+                <li key={menu.id} className={`menu ${activeMenu === menu.id ? 'activemenu' : ''}`}><Link href={'#'} onClick={(e) => { e.preventDefault(); scrollToSection(menu.id) }}>{menu.label}</Link> </li>
+              ))
+            }
             {/* <li>
                         <div className={`cursor-pointer w-[54px] h-[32px] bg-white rounded-3xl inline-flex items-center p-1 ${darkTheme ? 'bg-black' : 'bg-white'}`} onClick={() => setdarkTheme(!darkTheme)}>
                             <span className={`w-1/2 h-full rounded-full grid place-content-center transition-transform duration-300 ease-in-out  ${darkTheme ? '' : 'bg-[#2f3792] rotate-180'}`}><HiOutlineSun color={darkTheme ? '#7A7A73' : '#fff'} /></span>
@@ -86,37 +128,34 @@ const TopBar = () => {
           </ul>
         </div>
       </div>
-      
+
       {/* mobile menu */}
-      <div className="h-full w-full flex justify-between items-center bg-primary px-4 lg:hidden">
+      <div className="h-full w-full flex justify-between items-center bg-[#EEEEEC] px-4 lg:hidden">
         <span
           className="relavite z-9"
           onClick={() => setMobileMenu(!mobileMenu)}
         >
           {mobileMenu ? (
-            <HiOutlineX color="#fff" size={32} />
+            <HiOutlineX color="#03045E" size={32} />
           ) : (
-            <HiMenuAlt1 color="#fff" size={32} />
+            <HiMenuAlt1 color="#03045E" size={32} />
           )}{" "}
         </span>
         <span>
           <div
-            className={`cursor-pointer w-[54px] h-[32px] bg-white rounded-3xl inline-flex items-center p-1 ${
-              darkTheme ? "bg-black" : "bg-white"
-            }`}
+            className={`cursor-pointer w-[54px] h-[32px] bg-white rounded-3xl inline-flex items-center p-1 ${darkTheme ? "bg-black" : "bg-white"
+              }`}
             onClick={() => setdarkTheme(!darkTheme)}
           >
             <span
-              className={`w-1/2 h-full rounded-full grid place-content-center transition-transform duration-300 ease-in-out  ${
-                darkTheme ? "" : "bg-[#2f3792] rotate-180"
-              }`}
+              className={`w-1/2 h-full rounded-full grid place-content-center transition-transform duration-300 ease-in-out  ${darkTheme ? "" : "bg-[#2f3792] rotate-180"
+                }`}
             >
               <HiOutlineSun color={darkTheme ? "#7A7A73" : "#fff"} />
             </span>
             <span
-              className={`w-1/2 h-full rounded-full grid place-content-center transition-transform duration-300 ease-in-out ${
-                darkTheme ? "bg-[#2f3792] rotate-[260deg]" : ""
-              }`}
+              className={`w-1/2 h-full rounded-full grid place-content-center transition-transform duration-300 ease-in-out ${darkTheme ? "bg-[#2f3792] rotate-[260deg]" : ""
+                }`}
             >
               <HiOutlineMoon color={darkTheme ? "#fff" : "#7A7A73"} />
             </span>
@@ -128,33 +167,29 @@ const TopBar = () => {
             className={`fixed h-full overflow-hidden inset-0 flex flex-col justify-start bg-[inherit] items-center gap-5 pt-32`}
           >
             <li
-              className={`mobilemenu ${
-                activeMenu === "Home" ? "activemobilemenu" : ""
-              }`}
+              className={`mobilemenu ${activeMenu === "Home" ? "activemobilemenu" : ""
+                }`}
               onClick={() => handleMenuChange("Home")}
             >
               Home
             </li>
             <li
-              className={`mobilemenu ${
-                activeMenu === "Skills" ? "activemobilemenu" : ""
-              }`}
+              className={`mobilemenu ${activeMenu === "Skills" ? "activemobilemenu" : ""
+                }`}
               onClick={() => handleMenuChange("Skills")}
             >
               Skills
             </li>
             <li
-              className={`mobilemenu ${
-                activeMenu === "Projects" ? "activemobilemenu" : ""
-              }`}
+              className={`mobilemenu ${activeMenu === "Projects" ? "activemobilemenu" : ""
+                }`}
               onClick={() => handleMenuChange("Projects")}
             >
               Projects
             </li>
             <li
-              className={`mobilemenu ${
-                activeMenu === "Contact" ? "activemobilemenu" : ""
-              }`}
+              className={`mobilemenu ${activeMenu === "Contact" ? "activemobilemenu" : ""
+                }`}
               onClick={() => handleMenuChange("Contact")}
             >
               Contact

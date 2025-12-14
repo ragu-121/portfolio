@@ -226,54 +226,80 @@ const Skills = () => {
     // },
   ];
 
-  useGSAP(() => {
-    const items = gsap.utils.toArray(".skillitems");
+  // useGSAP(() => {
+  //   const items = gsap.utils.toArray(".skillitems");
 
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: skillsRef.current,
-        start: "top 80%",
-        end: "bottom 20%",
-        scrub: false,
-        markers: false,
+  //   const timeline = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: skillsRef.current,
+  //       start: "top 80%",
+  //       end: "bottom 20%",
+  //       scrub: false,
+  //       markers: false,
 
-        toggleActions: "play reverse play reverse",
-        // play when entering, reverse when leaving
-        // so animation always completes when exiting
-      },
+  //       toggleActions: "play reverse play reverse",
+  //       // play when entering, reverse when leaving
+  //       // so animation always completes when exiting
+  //     },
+  //   });
+
+  //   timeline.from('.skillheader', {
+  //     opacity: 0,
+  //     duration: 0.3,
+  //     ease: "power2.inOut",
+  //   })
+
+  //   items.forEach((item: any) => {
+  //     gsap.fromTo(
+  //       item,
+  //       { opacity: 0, scale: 0.5 },
+  //       {
+  //         opacity: 1,
+  //         scale: 1,
+  //         duration: 0.4,
+  //         ease: "power2.out",
+  //         stagger: 0.3,
+  //         scrollTrigger: {
+  //           trigger: item,
+  //           start: "top 85%", // triggers when each item enters the viewport
+  //           toggleActions: "play none none reverse", // fade out when leaving (optional)
+  //         },
+  //       }
+  //     );
+  //   });
+  // }, { scope: skillsRef });
+
+  useEffect(() => {
+    const sections: HTMLElement[] = gsap.utils.toArray("section");
+
+    sections.forEach((section) => {
+      const elements = section.querySelectorAll(".fadeIn, .slide");
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",     // when section enters
+          end: "bottom 20%",    // when it leaves
+          toggleActions: "play none none reverse",
+          
+        },
+      });
+
+      tl.from(elements, {
+        opacity: 0,
+        y: 40,
+        stagger: 0.2,
+        duration: 0.5,
+        ease: "power3.out",
+        clearProps: "all"
+      });
     });
-
-    timeline.from('.skillheader', {
-      opacity: 0,
-      duration: 0.3,
-      ease: "power2.inOut",
-    })
-
-    items.forEach((item: any) => {
-      gsap.fromTo(
-        item,
-        { opacity: 0, scale: 0.5 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.4,
-          ease: "power2.out",
-          stagger: 0.3,
-          scrollTrigger: {
-            trigger: item,
-            start: "top 85%", // triggers when each item enters the viewport
-            toggleActions: "play none none reverse", // fade out when leaving (optional)
-          },
-        }
-      );
-    });
-  }, { scope: skillsRef });
-
+  }, []);
   return (
-    <section className="main-container-wrapper" id="skills" ref={skillsRef}>
+    <section className="main-container-wrapper" id="Skills" ref={skillsRef}>
       <div className="py-10 main-container overflow-hidden">
         <div className="w-full relative z-1">
-          <h2 className="page-heading skillheader">Skills</h2>
+          <h2 className="page-heading fadeIn">Skills</h2>
 
           <div
 
@@ -284,7 +310,7 @@ const Skills = () => {
               return (
                 <div
                   key={index}
-                  className="skillitems group relative bg-card rounded-xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
+                  className="fadeIn skillitems group relative bg-card rounded-xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
                 >
                   {/* Gradient background on hover */}
                   <div

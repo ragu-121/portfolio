@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Toast from "../customComponents/Toast";
 import emailjs from "@emailjs/browser";
 import Link from "next/link";
@@ -90,69 +90,31 @@ const Contact = () => {
       });
     }
   };
-
-  useGSAP(() => {
-    const timeline = gsap.timeline({
-       scrollTrigger: {
-          trigger: contactRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          scrub: false,
-          markers: false,
-
-          toggleActions: "play reverse play reverse",
-          // play when entering, reverse when leaving
-          // so animation always completes when exiting
-        },
-    });
-    timeline.from(contactRef.current, {
-      scale: 0.8,
-      // duration: 0.3,
-      ease: "power2.inOut",
-    });
-    // timeline.from(".contactheadelem", {
-    //   opacity: 0,
-    //   duration: 0.3,
-    //   ease: "power2.inOut",
-    // });
-    // timeline.from(".contactdesc", {
-    //   opacity: 0,
-    //   duration: 0.3,
-    //   ease: "power2.inOut",
-    // });
-    // timeline.from(".inpone", {
-    //   opacity: 0,
-    //   duration: 0.3,
-    //   ease: "power2.inOut",
-    // });
-    // timeline.from(".inptwo", {
-    //   opacity: 0,
-    //   duration: 0.3,
-    //   ease: "power2.inOut",
-    // });
-    // timeline.from(".inpthree", {
-    //   opacity: 0,
-    //   duration: 0.3,
-    //   ease: "power2.inOut",
-    // });
-    // timeline.from(".contactbtns", {
-    //   opacity: 0,
-    //   duration: 0.3,
-    //   ease: "power2.inOut",
-    // })
-  }, { scope: contactRef })
+  useEffect(() => {
+    gsap.from('#Contact', {
+      opacity: 0,
+      scale: 0.5,
+      duration: 0.5,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#contact',
+        start: "top 80%",     // when section enters
+        end: "bottom 20%",    // when it leaves
+        toggleActions: "play none none reverse",
+      }
+    })
+  }, []);
 
   return (
-    <section id="contact" className="main-container-wrapper bg-[linear-gradient(181deg,rgb(165,255,165),transparent)]
- rounded-2xl contactmaincontainer" ref={contactRef}>
+    <section id="Contact" className="main-container-wrapper rounded-t-[54px] contactmaincontainer mt-8 bg-primary text-white" ref={contactRef}>
       <div className="main-container w-full contactcontainer">
-        <h2 className="page-heading contactheadelem">Get in touch</h2>
-        <p className="text-center text-sm leading-5 py-3 contactdesc">
+        <h2 className="page-heading pb-0 fadeIn">Get in touch</h2>
+        <p className="text-center text-sm leading-5 py-3 fadeIn">
           I'd love to hear from you! If you have any questions, comments,
           feedback, please use the form below.
         </p>
         <div className="flex flex-col md:flex-row items-center gap-0 md:gap-6">
-          <div className="w-full md:w-1/2 relative inpone">
+          <div className="w-full md:w-1/2 relative">
             <label
               htmlFor="Name"
               className="text-sm font-normal mt-6 mb-2 block"
@@ -164,7 +126,7 @@ const Contact = () => {
               type="text"
               name="name"
               id="Name"
-              className="w-full h-11 rounded-lg border outline-0 px-3 hover:border-primary focus:border-primary focus:shadow-[0_0_4px_3px_#afef9e]"
+              className="w-full h-11 rounded-lg border outline-0 px-3 border-white focus:shadow-[0_0_0_2px_#fff]"
               onChange={handleChange}
               value={datas.name}
               autoComplete="off"
@@ -175,7 +137,7 @@ const Contact = () => {
               </span>
             )}
           </div>
-          <div className="w-full md:w-1/2 relative inptwo">
+          <div className="w-full md:w-1/2 relative">
             <label
               htmlFor="email"
               className="text-sm font-normal mt-6 mb-2 block"
@@ -187,7 +149,7 @@ const Contact = () => {
               type="email"
               name="email"
               id="email"
-              className="w-full h-11 rounded-lg border outline-0 px-3 hover:border-primary focus:border-primary focus:shadow-[0_0_4px_3px_#afef9e]"
+              className="w-full h-11 rounded-lg border outline-0 px-3 border-white focus:shadow-[0_0_0_2px_#fff]"
               value={datas.email}
               onChange={handleChange}
               autoComplete="off"
@@ -200,7 +162,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="inpthree">
+        <div className="">
           <label
             htmlFor="message"
             className="text-sm font-normal mt-6 mb-2 block"
@@ -212,17 +174,17 @@ const Contact = () => {
             placeholder="Enter your message"
             name="message"
             id="message"
-            className="w-full rounded-lg border outline-0 p-3 resize-none hover:border-primary focus:border-primary focus:shadow-[0_0_4px_3px_#afef9e]"
+            className="w-full rounded-lg border outline-0 p-3 resize-none border-white focus:shadow-[0_0_0_2px_#fff]"
             value={datas.message}
             onChange={handleChange}
           ></textarea>
         </div>
 
-        <div className="w-full pt-3 text-center contactbtns">
-          <button className="btn-layout bg-blueone text-white" onClick={hanldeClear}>
+        <div className="w-full pt-3 text-center fadeIn">
+          <button className="btn-layout duration-150 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white" onClick={hanldeClear}>
             Clear All
           </button>
-          <button className="btn-layout bg-primary ml-2" onClick={handleSubmit}>
+          <button className="btn-layout duration-150 border bg-primary text-white ml-2 hover:bg-white hover:text-primary" onClick={handleSubmit}>
             Submit
           </button>
         </div>

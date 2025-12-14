@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { HiOutlineArrowSmRight } from "react-icons/hi";
 import { ExternalLink, Github, ArrowUpRight, Badge } from "lucide-react";
@@ -37,86 +37,45 @@ const Projects = () => {
     },
   ];
 
-  // useGSAP(
-  //   () => {
-
-  //     const timeline = gsap.timeline({
-  //       scrollTrigger: {
-  //         trigger: projRef.current, // Use the ref of the container element
-  //         start: "top 80%",              // Start the animation when the top of the trigger hits 80% down the viewport
-  //         end: "bottom 20%",             // End point of the ScrollTrigger (optional)
-  //         scrub: false,                  // Set to true for a scrub effect, or false for a single run
-  //         once: true,                    // Ensures the animation only runs once when the start point is hit
-  //         markers: true,              // Uncomment for visual debugging
-  //       },
-  //     });
-  //     timeline.from('.headelem', {
-  //       opacity: 0,
-  //       duration: 0.3,
-  //       ease: "power2.inOut",
-  //     })
-
-  //     timeline.fromTo(
-  //       ".projitems",
-  //       { opacity: 0, scale: 0.5 },
-  //       {
-  //         opacity: 1,
-  //         scale: 1,
-  //         stagger: 0.2,
-  //         duration: 0.5,
-  //         ease: "power2.out",
-  //       }
-  //     );
-  //   },
-  //   { scope: projRef }
-  // );
-  useGSAP(
-    () => {
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: projRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          scrub: false,
-          markers: false,
-
-          toggleActions: "play reverse play reverse",
-          // play when entering, reverse when leaving
-          // so animation always completes when exiting
-        },
+   useEffect(() => {
+      const sections: HTMLElement[] = gsap.utils.toArray("section");
+  
+      sections.forEach((section) => {
+        const elements = section.querySelectorAll(".fadeIn, .slide");
+  
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",     // when section enters
+            end: "bottom 20%",    // when it leaves
+            toggleActions: "play none none reverse",
+            
+          },
+        });
+  
+        tl.from(elements, {
+          opacity: 0,
+          y: 40,
+          stagger: 0.2,
+          duration: 0.5,
+          ease: "power3.out",
+          clearProps: "all"
+        });
       });
+    }, []);
 
-      timeline.from(".headelem", {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.inOut",
-      });
-
-      timeline.fromTo(
-        ".projitems",
-        { opacity: 0, y:50 },
-        {
-          opacity: 1,
-          y:0,
-          duration: 0.2,
-          ease: "power2.out",
-        }
-      );
-    },
-    { scope: projRef }
-  );
 
   return (
     <>
-      <section className="main-container-wrapper " id="projects" ref={projRef}>
+      <section className="main-container-wrapper " id="Projects" ref={projRef}>
         <div className="main-container w-full">
           <div className="">
-            <h2 className="page-heading headelem">Projects</h2>
+            <h2 className="page-heading fadeIn">Projects</h2>
             <div className="flex flex-wrap gap-6 items-center justify-center">
               {project_details.map((project, index) => (
                 <div
                   key={index}
-                  className={`projitems group relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-w-72 max-w-3xl`}
+                  className={`fadeIn group relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-w-72 max-w-3xl`}
                 >
                   <div className="absolute inset-0">
                     <Image
